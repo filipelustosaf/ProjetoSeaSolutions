@@ -35,7 +35,7 @@ public class TrabalhadorService {
 		trabalhador.setEmail(newTrabalhador.getEmail() != null ? newTrabalhador.getEmail() : trabalhador.getEmail());
 		trabalhador.setTelefone(newTrabalhador.getTelefone() != null ? newTrabalhador.getTelefone() : trabalhador.getTelefone());
 		trabalhador.setEndereco(newTrabalhador.getEndereco() != null ? newTrabalhador.getEndereco() : trabalhador.getEndereco());
-		trabalhador.setIdCargo(newTrabalhador.getIdCargo() != null ? newTrabalhador.getIdCargo() : trabalhador.getIdCargo());
+		trabalhador.setCargo(newTrabalhador.getCargo() != null ? newTrabalhador.getCargo() : trabalhador.getCargo());
 		return trabalhadorRepository.save(trabalhador);
 	}
 	

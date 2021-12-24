@@ -30,8 +30,7 @@ public class CargoService {
 		Cargo cargo = findById(id);		
 		cargo.setNome(newCargo.getNome() != null ? newCargo.getNome() : cargo.getNome());
 		cargo.setSalario(newCargo.getSalario() != 0 ? newCargo.getSalario() : cargo.getSalario());
-		cargo.setIdSetor(newCargo.getIdSetor() != null ? newCargo.getIdSetor() : cargo.getIdSetor());
-		cargo.setIdTrabalhador(newCargo.getIdTrabalhador() != null ? newCargo.getIdTrabalhador() : cargo.getIdTrabalhador());
+		cargo.setSetor(newCargo.getSetor() != null ? newCargo.getSetor() : cargo.getSetor());
 		return cargoRepository.save(cargo);
 	}
 	

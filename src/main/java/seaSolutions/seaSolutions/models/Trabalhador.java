@@ -8,11 +8,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.br.CPF;
@@ -60,9 +59,9 @@ public class Trabalhador implements Serializable {
 	@Column(name = "endereco")
 	private String endereco;
 	
-	@OneToOne()
+	@ManyToOne()
 	@JoinColumn(name = "id_cargo")
-	private Long idCargo;
+	private Cargo cargo;
 
 	public Trabalhador(@NotBlank(message = "Nome é um atributo obrigatório") @Size(max = 50) String nome,
 			@NotBlank(message = "CPF é um atributo obrigatório") @CPF @Size(max = 15) String cpf) {

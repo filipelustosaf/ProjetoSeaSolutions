@@ -28,7 +28,6 @@ public class SetorService {
 	public Setor update(Long id, Setor newSetor) throws Exception {
 		Setor setor = findById(id);		
 		setor.setNome(newSetor.getNome() != null ? newSetor.getNome() : setor.getNome());
-		setor.setCargos(newSetor.getCargos() != null ? newSetor.getCargos() : setor.getCargos());
 		return setorRepository.save(setor);
 	}
 	
