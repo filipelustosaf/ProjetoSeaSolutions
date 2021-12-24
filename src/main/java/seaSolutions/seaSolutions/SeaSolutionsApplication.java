@@ -8,6 +8,7 @@ public class SeaSolutionsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SeaSolutionsApplication.class, args);
+
 	}
 
 }
