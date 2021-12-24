@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import seaSolutions.seaSolutions.models.Trabalhador;
+import seaSolutions.seaSolutions.responses.MessageResponse;
+import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.TrabalhadorService;
 
 @RestController
 @RequestMapping(path = "/trabalhadores")
-public class TrabalhadorController {
+public class TrabalhadorController implements MessageResponse {
 	
 	@Autowired
 	private TrabalhadorService service;
@@ -37,17 +39,17 @@ public class TrabalhadorController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Trabalhador> create(@RequestBody Trabalhador trabalhador) {
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody Trabalhador trabalhador) {
 		Trabalhador newTrabalhador = service.create(trabalhador);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTrabalhador.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Trabalhador cadastrado com sucesso!"));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Trabalhador> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody Trabalhador trabalhador) throws Exception {
 		service.update(id, trabalhador);
-		return ResponseEntity.ok().body(trabalhador);
+		return ResponseEntity.ok().body(createMessageResponse("Trabalhador atualizado com sucesso!"));
 	}
 
 	@DeleteMapping(value = "/{id}")

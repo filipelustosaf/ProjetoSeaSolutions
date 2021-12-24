@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import seaSolutions.seaSolutions.models.Cargo;
+import seaSolutions.seaSolutions.responses.MessageResponse;
+import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.CargoService;
 
 @RestController
 @RequestMapping(path = "/cargos")
-public class CargoController {
+public class CargoController implements MessageResponse {
 	
 	@Autowired
 	private CargoService service;
@@ -37,17 +39,17 @@ public class CargoController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Cargo> create(@RequestBody Cargo cargo) {
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody Cargo cargo) {
 		Cargo newCargo = service.create(cargo);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCargo.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Cargo criado com sucesso!"));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Cargo> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody Cargo cargo) throws Exception {
 		service.update(id, cargo);
-		return ResponseEntity.ok().body(cargo);
+		return ResponseEntity.ok().body(createMessageResponse("Cargo atualizado com sucesso!"));
 	}
 	
 	@DeleteMapping(value = "/{id}")

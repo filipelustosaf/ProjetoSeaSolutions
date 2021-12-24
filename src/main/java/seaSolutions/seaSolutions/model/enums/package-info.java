@@ -1,0 +1,1 @@
+package seaSolutions.seaSolutions.model.enums;

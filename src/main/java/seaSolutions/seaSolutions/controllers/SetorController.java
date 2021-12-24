@@ -15,11 +15,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import seaSolutions.seaSolutions.models.Setor;
+import seaSolutions.seaSolutions.responses.MessageResponse;
+import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.SetorService;
 
 @RestController
 @RequestMapping(path = "/setores")
-public class SetorController {
+public class SetorController implements MessageResponse {
 	
 	@Autowired
 	private SetorService service;
@@ -37,17 +39,17 @@ public class SetorController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Setor> create(@RequestBody Setor setor) {
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody Setor setor) {
 		Setor newSetor = service.create(setor);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newSetor.getId()).toUri();
-		return ResponseEntity.created(uri).build();
+		return ResponseEntity.created(uri).body(createMessageResponse("Setor criado com sucesso!"));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<Setor> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
 		@RequestBody Setor setor) throws Exception {
 		service.update(id, setor);
-		return ResponseEntity.ok().body(setor);
+		return ResponseEntity.ok().body(createMessageResponse("Setor atualizado com sucesso!"));
 	}
 
 	@DeleteMapping(value = "/{id}")
