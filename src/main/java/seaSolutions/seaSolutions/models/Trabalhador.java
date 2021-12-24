@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,6 +20,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import seaSolutions.seaSolutions.model.enums.sexoEnum;
 
 @Data
 @NoArgsConstructor
@@ -42,6 +45,10 @@ public class Trabalhador implements Serializable {
 	@Size(max = 15)
 	@Column(name = "cpf", unique = true)
 	private String cpf;
+	
+	@Enumerated(EnumType.STRING)
+	@Column(name = "sexo")
+	private sexoEnum sexo;
 	
 	@Column(name = "data_nascimento")
 	private String dataNascimento;
