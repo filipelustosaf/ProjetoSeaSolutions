@@ -14,13 +14,13 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 import org.hibernate.validator.constraints.br.CPF;
-
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import seaSolutions.seaSolutions.model.enums.sexoEnum;
+import seaSolutions.seaSolutions.model.enums.statusTrabalhadorEnum;
 
 @Data
 @NoArgsConstructor
@@ -40,12 +40,13 @@ public class Trabalhador implements Serializable {
 	@Column(name = "nome")
 	private String nome;
 	
-	@NotBlank(message = "CPF é um atributo obrigatório")
+	@NotBlank(message = "CPF é um atributo obrigatório.")
 	@CPF
 	@Size(max = 15)
 	@Column(name = "cpf", unique = true)
 	private String cpf;
 	
+	@NotNull(message = "Sexo é um atributo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo")
 	private sexoEnum sexo;
@@ -66,16 +67,26 @@ public class Trabalhador implements Serializable {
 	@Column(name = "endereco")
 	private String endereco;
 	
+	@NotNull(message = "Cargo é um atributo obrigatório.")
 	@ManyToOne()
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargo;
 
+	@Enumerated(EnumType.STRING)
+	@Column(name = "status")
+	private statusTrabalhadorEnum status;
+
 	public Trabalhador(@NotBlank(message = "Nome é um atributo obrigatório") @Size(max = 50) String nome,
-			@NotBlank(message = "CPF é um atributo obrigatório") @CPF @Size(max = 15) String cpf) {
+			@NotBlank(message = "CPF é um atributo obrigatório") @CPF @Size(max = 15) String cpf,
+			@NotNull(message = "Sexo é um atributo obrigatório") sexoEnum sexo, Cargo cargo) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
+		this.sexo = sexo;
+		this.cargo = cargo;
+		this.status = statusTrabalhadorEnum.ATIVO;
 	}
-	
+
+
 	
 }

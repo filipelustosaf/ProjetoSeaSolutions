@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seaSolutions.seaSolutions.model.enums.setoresEnum;
+import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
 
 @Data
 @NoArgsConstructor
@@ -27,12 +27,11 @@ public class Setor implements Serializable{
 	@Column(name = "id_setor")
 	private Long id;
 	
-	@NotNull(message = "Nome é um atributo obrigatório")
-	@Enumerated(EnumType.STRING)
+	@NotNull(message = "Nome do setor é um atributo obrigatório")
 	@Column(name = "nome", unique = true)
-	private setoresEnum nome;
-
-	public Setor(@NotNull(message = "Nome é um atributo obrigatório") setoresEnum nome) {
+	private String nome;
+	
+	public Setor(@NotNull(message = "Nome do setor é um atributo obrigatório") String nome) {
 		super();
 		this.nome = nome;
 	}

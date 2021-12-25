@@ -14,6 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import seaSolutions.seaSolutions.model.enums.cargoNomeEnum;
+import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
+import seaSolutions.seaSolutions.model.enums.sexoEnum;
 import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.responses.MessageResponse;
 import seaSolutions.seaSolutions.responses.MessageResponseImpl;
@@ -57,4 +61,24 @@ public class TrabalhadorController implements MessageResponse {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+
+	@GetMapping(value = "/sexo/{sexo}")
+	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorSexo(@PathVariable sexoEnum sexo) throws Exception {
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorSexo(sexo);
+		return ResponseEntity.ok().body(trabalhadores);
+	};
+	
+	@GetMapping(value = "/cargo/{cargo}")
+	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorCargo(@PathVariable cargoNomeEnum cargo) throws Exception {
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorCargo(cargo);
+		return ResponseEntity.ok().body(trabalhadores);
+	};
+	
+	@GetMapping(value = "/setor/{setor}")
+	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorSetor(@PathVariable setorNomeEnum setor) throws Exception {
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorSetor(setor);
+		return ResponseEntity.ok().body(trabalhadores);
+	};
+
 }

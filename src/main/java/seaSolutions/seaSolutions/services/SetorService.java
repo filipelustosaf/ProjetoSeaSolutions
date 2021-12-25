@@ -35,4 +35,5 @@ public class SetorService {
 		Setor setor = findById(id);
 		setorRepository.delete(setor);
 	}
+	
 }
