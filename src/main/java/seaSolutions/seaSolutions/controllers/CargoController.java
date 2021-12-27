@@ -14,11 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
-import seaSolutions.seaSolutions.model.enums.cargoNomeEnum;
-import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
 import seaSolutions.seaSolutions.models.Cargo;
-import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.responses.MessageResponse;
 import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.CargoService;
@@ -63,7 +59,7 @@ public class CargoController implements MessageResponse {
 	}
 	
 	@GetMapping(value = "/setor/{setor}")
-	public ResponseEntity<List<Cargo>> findAllCargosPorSetor(@PathVariable setorNomeEnum setor) throws Exception {
+	public ResponseEntity<List<Cargo>> findAllCargosPorSetor(@PathVariable String setor) throws Exception {
 		List<Cargo> cargos = service.findAllCargosPorSetor(setor);
 		return ResponseEntity.ok().body(cargos);
 	};

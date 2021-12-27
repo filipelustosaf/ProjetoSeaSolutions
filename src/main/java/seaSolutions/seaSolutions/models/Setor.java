@@ -3,16 +3,15 @@ package seaSolutions.seaSolutions.models;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
 
 @Data
 @NoArgsConstructor
@@ -28,6 +27,7 @@ public class Setor implements Serializable{
 	private Long id;
 	
 	@NotNull(message = "Nome do setor é um atributo obrigatório")
+	@Size(max = 45)
 	@Column(name = "nome", unique = true)
 	private String nome;
 	

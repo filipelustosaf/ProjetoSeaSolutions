@@ -1,13 +1,9 @@
 package seaSolutions.seaSolutions.services;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
 import seaSolutions.seaSolutions.models.Cargo;
-import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.repositories.CargoRepository;
 
 @Service
@@ -43,7 +39,7 @@ public class CargoService {
 		cargoRepository.delete(cargo);
 	}
 	
-	public List<Cargo> findAllCargosPorSetor(setorNomeEnum setor) {
+	public List<Cargo> findAllCargosPorSetor(String setor) {
 		List<Cargo> cargos = cargoRepository.findAll();
 		List<Cargo> cargosNoSetor = null;
 		for (Cargo cargo : cargos) {

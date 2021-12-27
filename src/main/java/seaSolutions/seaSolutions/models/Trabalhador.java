@@ -84,7 +84,6 @@ public class Trabalhador implements Serializable {
 		this.cpf = cpf;
 		this.sexo = sexo;
 		this.cargo = cargo;
-		this.status = statusTrabalhadorEnum.ATIVO;
 	}
 
 

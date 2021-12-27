@@ -1,12 +1,10 @@
 package seaSolutions.seaSolutions.services;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import seaSolutions.seaSolutions.model.enums.cargoNomeEnum;
-import seaSolutions.seaSolutions.model.enums.setorNomeEnum;
 import seaSolutions.seaSolutions.model.enums.sexoEnum;
 import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.repositories.TrabalhadorRepository;
@@ -51,7 +49,7 @@ public class TrabalhadorService {
 	
 	public List<Trabalhador> findAllTrabalhadoresPorSexo(sexoEnum sexo) {
 		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresPorSexo = null;
+		List<Trabalhador> trabalhadoresPorSexo = new ArrayList<Trabalhador>();
 		for (Trabalhador trabalhador : trabalhadores) {
 			if (trabalhador.getSexo().equals(sexo)) {
 				trabalhadoresPorSexo.add(trabalhador);
@@ -60,9 +58,9 @@ public class TrabalhadorService {
 		return trabalhadoresPorSexo;
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresPorCargo(cargoNomeEnum cargo) {
+	public List<Trabalhador> findAllTrabalhadoresPorCargo(String cargo) {
 		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresPorCargo = null;
+		List<Trabalhador> trabalhadoresPorCargo = new ArrayList<Trabalhador>();
 		for (Trabalhador trabalhador : trabalhadores) {
 			if (trabalhador.getCargo().getNome().equals(cargo)) {
 				trabalhadoresPorCargo.add(trabalhador);
@@ -71,9 +69,9 @@ public class TrabalhadorService {
 		return trabalhadoresPorCargo;
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresPorSetor(setorNomeEnum setor) {
+	public List<Trabalhador> findAllTrabalhadoresPorSetor(String setor) {
 		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresNoSetor = null;
+		List<Trabalhador> trabalhadoresNoSetor = new ArrayList<Trabalhador>();
 		for (Trabalhador trabalhador : trabalhadores) {
 			if (trabalhador.getCargo().getSetor().getNome().equals(setor)) {
 				trabalhadoresNoSetor.add(trabalhador);

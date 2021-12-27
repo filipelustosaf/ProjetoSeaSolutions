@@ -12,9 +12,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seaSolutions.seaSolutions.model.enums.cargoNomeEnum;
 import seaSolutions.seaSolutions.model.enums.nivelCargoEnum;
 
 @Data
@@ -31,9 +32,9 @@ public class Cargo implements Serializable {
 	private Long id;
 	
 	@NotNull(message = "Nome do cargo é um atributo obrigatório")
-	@Enumerated(EnumType.STRING)
+	@Size(max = 45)
 	@Column(name = "nome")
-	private cargoNomeEnum nome;
+	private String nome;
 	
 	@NotNull(message = "Nivel do cargo é um atributo obrigatório")
 	@Enumerated(EnumType.STRING)
@@ -49,7 +50,7 @@ public class Cargo implements Serializable {
 	@JoinColumn(name = "id_setor")
 	private Setor setor;
 
-	public Cargo(@NotNull(message = "Nome do cargo é um atributo obrigatório") cargoNomeEnum nome,
+	public Cargo(@NotNull(message = "Nome do cargo é um atributo obrigatório") String nome,
 			@NotNull(message = "Nivel do cargo é um atributo obrigatório") nivelCargoEnum nivel,
 			@NotNull(message = "Salário é um atributo obrigatório") double salario, Setor setor) {
 		super();
