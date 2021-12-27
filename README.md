@@ -6,7 +6,6 @@
 	• <a href="#descricao">Descrição</a> •
 	<a href="#versionamento">Versionamento</a> •
 	<a href="#arquitetura">Arquitetura</a> •
-	<a href="#documentacao">Documentação</a> •
 	<a href="#tecnologias-dependencias">Tecnologias e Dependências</a> •
 </p>  
 
@@ -31,10 +30,6 @@
 
 <p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. </p>
 
-<h1 id="documentacao">
-<img height="30" src="https://img.icons8.com/color/48/000000/documents.png"/>
-  Documentação
-</h1>
 
 <h1 id="tecnologias-dependencias">
 <img height="30" src="https://img.icons8.com/fluency/50/000000/administrative-tools.png"/>
@@ -49,4 +44,4 @@
 - [H2 Database](https://www.h2database.com/html/main.html) - Database
 - [Spring Data Jpa](https://spring.io/projects/spring-data-jpa) - Abstração orm do spring pra integração com o banco de dados
 - [Postman](https://www.postman.com/) - Ferramenta para testes nas requisições
-- [Lombok](https://projectlombok.org/) - Framework para abstração e melhora na legibilidade do código
+- [Lombok](https://projectlombok.org/) - Framework para melhora na legibilidade do código
