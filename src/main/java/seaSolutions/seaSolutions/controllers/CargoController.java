@@ -60,7 +60,7 @@ public class CargoController implements MessageResponse {
 	
 	@GetMapping(value = "/setor/{setor}")
 	public ResponseEntity<List<Cargo>> findAllCargosPorSetor(@PathVariable String setor) throws Exception {
-		List<Cargo> cargos = service.findAllCargosPorSetor(setor);
+		List<Cargo> cargos = service.findAllCargosBySetor(setor);
 		return ResponseEntity.ok().body(cargos);
 	};
 }

@@ -39,7 +39,7 @@ public class SetorController implements MessageResponse {
 	}
 	
 	@PostMapping
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody Setor setor) {
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody Setor setor) throws Exception {
 		Setor newSetor = service.create(setor);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newSetor.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Setor criado com sucesso!"));

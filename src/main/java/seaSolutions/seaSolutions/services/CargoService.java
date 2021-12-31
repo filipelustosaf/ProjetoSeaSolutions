@@ -1,8 +1,13 @@
 package seaSolutions.seaSolutions.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import seaSolutions.seaSolutions.exceptions.AttributesErrorException;
+import seaSolutions.seaSolutions.exceptions.ResourceNotFoundException;
 import seaSolutions.seaSolutions.models.Cargo;
 import seaSolutions.seaSolutions.repositories.CargoRepository;
 
@@ -12,9 +17,9 @@ public class CargoService {
 	@Autowired
 	private CargoRepository cargoRepository;
 	
-	public Cargo findById(Long id) throws Exception {	
+	public Cargo findById(Long id) {	
 		return cargoRepository.findById(id)
-				.orElseThrow(() -> new Exception("Cargo não encontrado."));
+				.orElseThrow(() -> new ResourceNotFoundException("Cargo não encontrado!"));
 	}
 	
 	public List<Cargo> findAll() {
@@ -22,32 +27,35 @@ public class CargoService {
 	}	
 	
 	public Cargo create(Cargo cargo) {
-		return cargoRepository.save(cargo);
+		try {
+			cargoRepository.save(cargo);
+		} catch (Exception e) {
+			throw new AttributesErrorException("Erro nos atributos passados!");
+		} 	
+		return cargo;
 	}
 	
-	public Cargo update(Long id, Cargo newCargo) throws Exception {
+	public Cargo update(Long id, Cargo newCargo) {
 		Cargo cargo = findById(id);		
-		cargo.setNome(newCargo.getNome() != null ? newCargo.getNome() : cargo.getNome());
+		cargo.setNome(newCargo.getNome() != null ? newCargo.getNome() : cargo.getNome()) ;
 		cargo.setNivel(newCargo.getNivel() != null ? newCargo.getNivel() : cargo.getNivel());
 		cargo.setSalario(newCargo.getSalario() != 0 ? newCargo.getSalario() : cargo.getSalario());
 		cargo.setSetor(newCargo.getSetor() != null ? newCargo.getSetor() : cargo.getSetor());
 		return cargoRepository.save(cargo);
 	}
 	
-	public void delete(Long id) throws Exception {
+	public void delete(Long id) {
 		Cargo cargo = findById(id);
 		cargoRepository.delete(cargo);
 	}
 	
-	public List<Cargo> findAllCargosPorSetor(String setor) {
-		List<Cargo> cargos = cargoRepository.findAll();
-		List<Cargo> cargosNoSetor = null;
-		for (Cargo cargo : cargos) {
-			if (cargo.getSetor().getNome().equals(setor)) {
-				cargosNoSetor.add(cargo);
-			}
-		}
-		return cargosNoSetor;
+	
+	public List<Cargo> findAllCargosBySetor(String setor) {
+		List<Cargo> cargos = cargoRepository.findAll()
+			.stream()
+			.filter(c -> c.getSetor().getNome().equals(setor))
+			.collect(Collectors.toList());
+		return cargos;
 	}
 	
 }

@@ -35,7 +35,7 @@ public class Trabalhador implements Serializable {
 	@Column(name = "id_trabalhador")
 	private Long id;
 	
-	@NotBlank(message = "Nome é um atributo obrigatório")
+	@NotBlank(message = "Nome é um atributo obrigatório.")
 	@Size(max = 50)
 	@Column(name = "nome")
 	private String nome;
@@ -72,19 +72,25 @@ public class Trabalhador implements Serializable {
 	@JoinColumn(name = "id_cargo")
 	private Cargo cargo;
 
+	@NotNull(message = "Status é um atributo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
 	private statusTrabalhadorEnum status;
 
-	public Trabalhador(@NotBlank(message = "Nome é um atributo obrigatório") @Size(max = 50) String nome,
-			@NotBlank(message = "CPF é um atributo obrigatório") @CPF @Size(max = 15) String cpf,
-			@NotNull(message = "Sexo é um atributo obrigatório") sexoEnum sexo, Cargo cargo) {
+	public Trabalhador(@NotBlank(message = "Nome é um atributo obrigatório.") @Size(max = 50) String nome,
+			@NotBlank(message = "CPF é um atributo obrigatório.") @CPF @Size(max = 15) String cpf,
+			@NotNull(message = "Sexo é um atributo obrigatório.") sexoEnum sexo,
+			@NotNull(message = "Cargo é um atributo obrigatório.") Cargo cargo,
+			@NotNull(message = "Status é um atributo obrigatório.") statusTrabalhadorEnum status) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;
 		this.sexo = sexo;
 		this.cargo = cargo;
+		this.status = status;
 	}
+
+
 
 
 	

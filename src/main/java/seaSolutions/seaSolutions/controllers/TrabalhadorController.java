@@ -40,7 +40,7 @@ public class TrabalhadorController implements MessageResponse {
 	}
 	
 	@PostMapping
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody Trabalhador trabalhador) {
+	public ResponseEntity<MessageResponseImpl> create(@RequestBody Trabalhador trabalhador) throws Exception {
 		Trabalhador newTrabalhador = service.create(trabalhador);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTrabalhador.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Trabalhador cadastrado com sucesso!"));
@@ -63,19 +63,19 @@ public class TrabalhadorController implements MessageResponse {
 	@GetMapping(value = "/sexo/{sexo}")
 	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorSexo(@PathVariable String sexo) throws Exception {
 		sexoEnum sexoEnum = seaSolutions.seaSolutions.model.enums.sexoEnum.getSexoEnum(sexo);
-		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorSexo(sexoEnum);
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresBySexo(sexoEnum);
 		return ResponseEntity.ok().body(trabalhadores);
 	};
 	
 	@GetMapping(value = "/cargo/{cargo}")
 	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorCargo(@PathVariable String cargo) throws Exception {
-		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorCargo(cargo);
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresByCargo(cargo);
 		return ResponseEntity.ok().body(trabalhadores);
 	};
 	
 	@GetMapping(value = "/setor/{setor}")
 	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorSetor(@PathVariable String setor) throws Exception {
-		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresPorSetor(setor);
+		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresBySetor(setor);
 		return ResponseEntity.ok().body(trabalhadores);
 	};
 

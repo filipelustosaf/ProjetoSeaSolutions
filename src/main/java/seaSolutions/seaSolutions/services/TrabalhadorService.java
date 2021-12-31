@@ -1,10 +1,11 @@
 package seaSolutions.seaSolutions.services;
 
-import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import seaSolutions.seaSolutions.exceptions.AttributesErrorException;
+import seaSolutions.seaSolutions.exceptions.ResourceNotFoundException;
 import seaSolutions.seaSolutions.model.enums.sexoEnum;
 import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.repositories.TrabalhadorRepository;
@@ -15,20 +16,25 @@ public class TrabalhadorService {
 	@Autowired
 	private TrabalhadorRepository trabalhadorRepository;
 	
-	public Trabalhador findById(Long id) throws Exception {	
+	public Trabalhador findById(Long id) {	
 		return trabalhadorRepository.findById(id)
-				.orElseThrow(() -> new Exception("Trabalhador não encontrado."));
+				.orElseThrow(() -> new ResourceNotFoundException("Trabalhador não encontrado!"));
 	}
 	
 	public List<Trabalhador> findAll() {
 		return trabalhadorRepository.findAll();
 	}	
 	
-	public Trabalhador create(Trabalhador trabalhador) {
-		return trabalhadorRepository.save(trabalhador);
+	public Trabalhador create(Trabalhador trabalhador) throws Exception {
+		try {
+			trabalhadorRepository.save(trabalhador);
+		} catch (Exception e) {
+			throw new AttributesErrorException("Erro nos atributos passados!");
+		} 		
+		return trabalhador;
 	}
 	
-	public Trabalhador update(Long id, Trabalhador newTrabalhador) throws Exception {
+	public Trabalhador update(Long id, Trabalhador newTrabalhador) {
 		Trabalhador trabalhador = findById(id);		
 		trabalhador.setNome(newTrabalhador.getNome() != null ? newTrabalhador.getNome() : trabalhador.getNome());
 		trabalhador.setCpf(newTrabalhador.getCpf() != null ? newTrabalhador.getCpf() : trabalhador.getCpf());
@@ -42,42 +48,33 @@ public class TrabalhadorService {
 		return trabalhadorRepository.save(trabalhador);
 	}
 	
-	public void delete(Long id) throws Exception {
+	public void delete(Long id) {
 		Trabalhador trabalhador = findById(id);
 		trabalhadorRepository.delete(trabalhador);
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresPorSexo(sexoEnum sexo) {
-		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresPorSexo = new ArrayList<Trabalhador>();
-		for (Trabalhador trabalhador : trabalhadores) {
-			if (trabalhador.getSexo().equals(sexo)) {
-				trabalhadoresPorSexo.add(trabalhador);
-			}
-		}
-		return trabalhadoresPorSexo;
+	public List<Trabalhador> findAllTrabalhadoresBySexo(sexoEnum sexo) {
+		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll()
+			.stream()
+			.filter(t -> t.getSexo().equals(sexo))
+			.collect(Collectors.toList());
+		return trabalhadores;
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresPorCargo(String cargo) {
-		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresPorCargo = new ArrayList<Trabalhador>();
-		for (Trabalhador trabalhador : trabalhadores) {
-			if (trabalhador.getCargo().getNome().equals(cargo)) {
-				trabalhadoresPorCargo.add(trabalhador);
-			}
-		}
-		return trabalhadoresPorCargo;
+	public List<Trabalhador> findAllTrabalhadoresByCargo(String cargo) {
+		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll()
+			.stream()
+			.filter(t -> t.getCargo().getNome().equals(cargo))
+			.collect(Collectors.toList());
+		return trabalhadores;
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresPorSetor(String setor) {
-		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll();
-		List<Trabalhador> trabalhadoresNoSetor = new ArrayList<Trabalhador>();
-		for (Trabalhador trabalhador : trabalhadores) {
-			if (trabalhador.getCargo().getSetor().getNome().equals(setor)) {
-				trabalhadoresNoSetor.add(trabalhador);
-			}
-		}
-		return trabalhadoresNoSetor;
+	public List<Trabalhador> findAllTrabalhadoresBySetor(String setor) {
+		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll()
+			.stream()
+			.filter(t -> t.getCargo().getSetor().getNome().equals(setor))
+			.collect(Collectors.toList());;
+		return trabalhadores;
 	}
 	
 }

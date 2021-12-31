@@ -8,6 +8,7 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum sexoEnum {
+	
 	MASCULINO("m"), 
 	FEMININO("f");
 	
