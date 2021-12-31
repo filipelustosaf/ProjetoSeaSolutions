@@ -6,6 +6,7 @@
 	• <a href="#descricao">Descrição</a> •
 	<a href="#versionamento">Versionamento</a> •
 	<a href="#arquitetura">Arquitetura</a> •
+	<a href="#documentacao">Documentação</a> •
 	<a href="#tecnologias-dependencias">Tecnologias e Dependências</a> •
 </p>  
 
@@ -28,8 +29,139 @@
   Arquitetura
 </h1>
 
-<p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. </p>
+<p text-align="justify">&emsp;&emsp;&emsp;A arquitetura do projeto segue o padrão MVC, com a adição de uma camada de Service na qual são incluídas as regras de negócio e uma camada de Repository, na qual são criadas as queries executadas no banco de dados. Também foram criados pacotes auxiliates para o desenvolvimento do projeto.</p>
 
+<p align="center">  
+  <img align="center" src="https://github.com/filipelustosaf/ProjetoSeaSolutions/blob/da6ac17a665fbf7cf5db3285a5c39836dd7c0259/Imagens/Arquitetura%20do%20Projeto.png" width="500px" />
+</p>
+
+<p text-align="justify">&emsp;&emsp;&emsp; Foram criadas três classes principais, no desenvolvimento da API, que podem ser visualizadas no diagrama abaixo. </p>
+
+<p align="center">  
+  <img align="center" src="https://github.com/filipelustosaf/ProjetoSeaSolutions/blob/da6ac17a665fbf7cf5db3285a5c39836dd7c0259/Imagens/Diagrama.png" width="500px" />
+</p>
+
+<h1 id="documentacao">
+<img height="30" src="https://img.icons8.com/color/48/000000/documents.png"/>
+  Documentação
+</h1>
+
+### Endpoints
+
+Breve descrição dos endpoints da aplicação.
+
+<details>
+  <summary>Trabalhador</summary>
+<br>
+  
+Retorna o trabalhador a partir do id.
+``` ruby
+GET /trabalhadores/{id}
+```
+
+Retorna uma lista com todos os trabalhadores.
+``` ruby
+GET /trabalhadores
+```
+	
+Cria um trabalhador.
+``` ruby
+POST /trabalhadores
+```
+
+Altera os dados de um trabalhador a partir do id.
+``` ruby
+PUT /trabalhadores/{id}
+```
+
+Deleta um trabalhador a partir do id.
+``` ruby
+DELETE /trabalhadores/{id}
+```
+  
+Retorna uma lista de trabalhadores por sexo.
+``` ruby
+GET /trabalhadores/sexo/{sexo}
+```
+
+Retorna uma lista de trabalhadores por cargo.
+``` ruby
+GET /trabalhadores/cargo/{cargo}
+```
+	
+Retorna uma lista de trabalhadores por setor.
+``` ruby
+GET /trabalhadores/setor/{setor}
+```
+	
+</details>
+
+<details>
+  <summary>Cargo</summary>
+<br>
+  
+Retorna o cargo a partir do id.
+``` ruby
+GET /cargos/{id}
+```
+
+Retorna uma lista com todos os cargos.
+``` ruby
+GET /cargos
+```
+	
+Cria um cargo.
+``` ruby
+POST /cargo
+```
+
+Altera os dados de um cargo a partir do id.
+``` ruby
+PUT /cargos/{id}
+```
+
+Deleta um cargo a partir do id.
+``` ruby
+DELETE /cargos/{id}
+```
+  
+Retorna uma lista de cargos por setor.
+``` ruby
+GET /cargos/setor/{setor}
+```
+	
+</details>
+
+<details>
+  <summary>Setor</summary>
+<br>
+  
+Retorna o setor a partir do id.
+``` ruby
+GET /setores/{id}
+```
+
+Retorna uma lista com todos os setores.
+``` ruby
+GET /setores
+```
+	
+Cria um setor.
+``` ruby
+POST /setor
+```
+
+Altera os dados de um setor a partir do id.
+``` ruby
+PUT /setores/{id}
+```
+
+Deleta um setor a partir do id.
+``` ruby
+DELETE /setores/{id}
+```
+	
+</details>
 
 <h1 id="tecnologias-dependencias">
 <img height="30" src="https://img.icons8.com/fluency/50/000000/administrative-tools.png"/>
