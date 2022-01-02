@@ -112,7 +112,7 @@ GET /cargos
 	
 Cria um cargo.
 ``` ruby
-POST /cargo
+POST /cargos
 ```
 
 Altera os dados de um cargo a partir do id.
@@ -148,7 +148,7 @@ GET /setores
 	
 Cria um setor.
 ``` ruby
-POST /setor
+POST /setores
 ```
 
 Altera os dados de um setor a partir do id.
