@@ -2,11 +2,8 @@ package seaSolutions.seaSolutions.services;
 
 import java.util.List;
 import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import seaSolutions.seaSolutions.exceptions.AttributesErrorException;
 import seaSolutions.seaSolutions.exceptions.ResourceNotFoundException;
 import seaSolutions.seaSolutions.models.Cargo;
 import seaSolutions.seaSolutions.repositories.CargoRepository;
@@ -27,11 +24,7 @@ public class CargoService {
 	}	
 	
 	public Cargo create(Cargo cargo) {
-		try {
-			cargoRepository.save(cargo);
-		} catch (Exception e) {
-			throw new AttributesErrorException("Erro nos atributos passados!");
-		} 	
+		cargoRepository.save(cargo);
 		return cargo;
 	}
 	
@@ -48,7 +41,6 @@ public class CargoService {
 		Cargo cargo = findById(id);
 		cargoRepository.delete(cargo);
 	}
-	
 	
 	public List<Cargo> findAllCargosBySetor(String setor) {
 		List<Cargo> cargos = cargoRepository.findAll()

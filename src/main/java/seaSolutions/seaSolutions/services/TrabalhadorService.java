@@ -4,9 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import seaSolutions.seaSolutions.exceptions.AttributesErrorException;
 import seaSolutions.seaSolutions.exceptions.ResourceNotFoundException;
-import seaSolutions.seaSolutions.model.enums.sexoEnum;
+import seaSolutions.seaSolutions.model.enums.SexoEnum;
 import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.repositories.TrabalhadorRepository;
 
@@ -26,11 +25,7 @@ public class TrabalhadorService {
 	}	
 	
 	public Trabalhador create(Trabalhador trabalhador) throws Exception {
-		try {
-			trabalhadorRepository.save(trabalhador);
-		} catch (Exception e) {
-			throw new AttributesErrorException("Erro nos atributos passados!");
-		} 		
+		trabalhadorRepository.save(trabalhador);	
 		return trabalhador;
 	}
 	
@@ -53,7 +48,7 @@ public class TrabalhadorService {
 		trabalhadorRepository.delete(trabalhador);
 	}
 	
-	public List<Trabalhador> findAllTrabalhadoresBySexo(sexoEnum sexo) {
+	public List<Trabalhador> findAllTrabalhadoresBySexo(SexoEnum sexo) {
 		List<Trabalhador> trabalhadores = trabalhadorRepository.findAll()
 			.stream()
 			.filter(t -> t.getSexo().equals(sexo))

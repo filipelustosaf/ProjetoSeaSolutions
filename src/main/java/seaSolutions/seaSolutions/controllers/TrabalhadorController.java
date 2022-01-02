@@ -14,21 +14,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import seaSolutions.seaSolutions.model.enums.sexoEnum;
+import seaSolutions.seaSolutions.model.enums.SexoEnum;
 import seaSolutions.seaSolutions.models.Trabalhador;
 import seaSolutions.seaSolutions.responses.MessageResponse;
-import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.TrabalhadorService;
 
 @RestController
 @RequestMapping(path = "/trabalhadores")
-public class TrabalhadorController implements MessageResponse {
+public class TrabalhadorController extends MessageResponseController {
 	
 	@Autowired
 	private TrabalhadorService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Trabalhador> findById(@PathVariable Long id) throws Exception {
+	public ResponseEntity<Trabalhador> findById(@PathVariable Long id) {
 		Trabalhador trabalhador = service.findById(id);
 		return ResponseEntity.ok().body(trabalhador);
 	};
@@ -40,21 +39,21 @@ public class TrabalhadorController implements MessageResponse {
 	}
 	
 	@PostMapping
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody Trabalhador trabalhador) throws Exception {
+	public ResponseEntity<MessageResponse> create(@RequestBody Trabalhador trabalhador) throws Exception {
 		Trabalhador newTrabalhador = service.create(trabalhador);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTrabalhador.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Trabalhador cadastrado com sucesso!"));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
-		@RequestBody Trabalhador trabalhador) throws Exception {
+	public ResponseEntity<MessageResponse> update(@PathVariable Long id,
+		@RequestBody Trabalhador trabalhador) {
 		service.update(id, trabalhador);
 		return ResponseEntity.ok().body(createMessageResponse("Trabalhador atualizado com sucesso!"));
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}
@@ -62,7 +61,7 @@ public class TrabalhadorController implements MessageResponse {
 
 	@GetMapping(value = "/sexo/{sexo}")
 	public ResponseEntity<List<Trabalhador>> findAllTrabalhadoresPorSexo(@PathVariable String sexo) throws Exception {
-		sexoEnum sexoEnum = seaSolutions.seaSolutions.model.enums.sexoEnum.getSexoEnum(sexo);
+		SexoEnum sexoEnum = seaSolutions.seaSolutions.model.enums.SexoEnum.getSexoEnum(sexo);
 		List<Trabalhador> trabalhadores = service.findAllTrabalhadoresBySexo(sexoEnum);
 		return ResponseEntity.ok().body(trabalhadores);
 	};

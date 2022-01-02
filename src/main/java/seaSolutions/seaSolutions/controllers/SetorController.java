@@ -16,18 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import seaSolutions.seaSolutions.models.Setor;
 import seaSolutions.seaSolutions.responses.MessageResponse;
-import seaSolutions.seaSolutions.responses.MessageResponseImpl;
 import seaSolutions.seaSolutions.services.SetorService;
 
 @RestController
 @RequestMapping(path = "/setores")
-public class SetorController implements MessageResponse {
+public class SetorController extends MessageResponseController {
 	
 	@Autowired
 	private SetorService service;
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Setor> findById(@PathVariable Long id) throws Exception {
+	public ResponseEntity<Setor> findById(@PathVariable Long id) {
 		Setor setor = service.findById(id);
 		return ResponseEntity.ok().body(setor);
 	};
@@ -39,21 +38,21 @@ public class SetorController implements MessageResponse {
 	}
 	
 	@PostMapping
-	public ResponseEntity<MessageResponseImpl> create(@RequestBody Setor setor) throws Exception {
+	public ResponseEntity<MessageResponse> create(@RequestBody Setor setor) throws Exception {
 		Setor newSetor = service.create(setor);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newSetor.getId()).toUri();
 		return ResponseEntity.created(uri).body(createMessageResponse("Setor criado com sucesso!"));
 	}
 	
 	@PutMapping(value = "/{id}")
-	public ResponseEntity<MessageResponseImpl> update(@PathVariable Long id,
+	public ResponseEntity<MessageResponse> update(@PathVariable Long id,
 		@RequestBody Setor setor) throws Exception {
 		service.update(id, setor);
 		return ResponseEntity.ok().body(createMessageResponse("Setor atualizado com sucesso!"));
 	}
 
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable Long id) throws Exception {
+	public ResponseEntity<Void> delete(@PathVariable Long id) {
 		service.delete(id);
 		return ResponseEntity.noContent().build();
 	}

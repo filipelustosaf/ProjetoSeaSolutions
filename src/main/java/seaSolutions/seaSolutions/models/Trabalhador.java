@@ -19,8 +19,8 @@ import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.br.CPF;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seaSolutions.seaSolutions.model.enums.sexoEnum;
-import seaSolutions.seaSolutions.model.enums.statusTrabalhadorEnum;
+import seaSolutions.seaSolutions.model.enums.SexoEnum;
+import seaSolutions.seaSolutions.model.enums.StatusTrabalhadorEnum;
 
 @Data
 @NoArgsConstructor
@@ -49,7 +49,7 @@ public class Trabalhador implements Serializable {
 	@NotNull(message = "Sexo é um atributo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "sexo")
-	private sexoEnum sexo;
+	private SexoEnum sexo;
 	
 	@Column(name = "data_nascimento")
 	private String dataNascimento;
@@ -75,13 +75,13 @@ public class Trabalhador implements Serializable {
 	@NotNull(message = "Status é um atributo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "status")
-	private statusTrabalhadorEnum status;
+	private StatusTrabalhadorEnum status;
 
 	public Trabalhador(@NotBlank(message = "Nome é um atributo obrigatório.") @Size(max = 50) String nome,
 			@NotBlank(message = "CPF é um atributo obrigatório.") @CPF @Size(max = 15) String cpf,
-			@NotNull(message = "Sexo é um atributo obrigatório.") sexoEnum sexo,
+			@NotNull(message = "Sexo é um atributo obrigatório.") SexoEnum sexo,
 			@NotNull(message = "Cargo é um atributo obrigatório.") Cargo cargo,
-			@NotNull(message = "Status é um atributo obrigatório.") statusTrabalhadorEnum status) {
+			@NotNull(message = "Status é um atributo obrigatório.") StatusTrabalhadorEnum status) {
 		super();
 		this.nome = nome;
 		this.cpf = cpf;

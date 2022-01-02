@@ -16,7 +16,7 @@ import javax.validation.constraints.Size;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import seaSolutions.seaSolutions.model.enums.nivelCargoEnum;
+import seaSolutions.seaSolutions.model.enums.NivelCargoEnum;
 
 @Data
 @NoArgsConstructor
@@ -39,7 +39,7 @@ public class Cargo implements Serializable {
 	@NotNull(message = "Nivel do cargo é um atributo obrigatório.")
 	@Enumerated(EnumType.STRING)
 	@Column(name = "nivel")
-	private nivelCargoEnum nivel;
+	private NivelCargoEnum nivel;
 	
 	@NotNull(message = "Salário é um atributo obrigatório.")
 	@Column(name = "salario")
@@ -51,7 +51,7 @@ public class Cargo implements Serializable {
 	private Setor setor;
 
 	public Cargo(@NotNull(message = "Nome do cargo é um atributo obrigatório.") @Size(max = 45) String nome,
-			@NotNull(message = "Nivel do cargo é um atributo obrigatório.") nivelCargoEnum nivel,
+			@NotNull(message = "Nivel do cargo é um atributo obrigatório.") NivelCargoEnum nivel,
 			@NotNull(message = "Salário é um atributo obrigatório.") double salario,
 			@NotNull(message = "Setor é um atributo obrigatório.") Setor setor) {
 		super();

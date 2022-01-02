@@ -1,5 +1,5 @@
 package seaSolutions.seaSolutions.model.enums;
 
-public enum nivelCargoEnum {
+public enum NivelCargoEnum {
 	JUNIOR, PLENO, SENIOR
 }

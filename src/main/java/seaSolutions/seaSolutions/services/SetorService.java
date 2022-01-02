@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import seaSolutions.seaSolutions.exceptions.AttributesErrorException;
 import seaSolutions.seaSolutions.exceptions.ResourceNotFoundException;
 import seaSolutions.seaSolutions.models.Setor;
 import seaSolutions.seaSolutions.repositories.SetorRepository;
@@ -25,11 +24,7 @@ public class SetorService {
 	}	
 	
 	public Setor create(Setor setor) throws Exception {
-		try {
-			setorRepository.save(setor);
-		} catch (Exception e) {
-			throw new AttributesErrorException("Erro nos atributos passados!");
-		} 	
+		setorRepository.save(setor);
 		return setor;
 	}
 	

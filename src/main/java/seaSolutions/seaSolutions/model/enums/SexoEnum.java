@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum sexoEnum {
+public enum SexoEnum {
 	
 	MASCULINO("m"), 
 	FEMININO("f");
@@ -15,8 +15,8 @@ public enum sexoEnum {
     private String sexo;
     
     @JsonCreator
-    public static sexoEnum getSexoEnum(String value) {
-        for (sexoEnum sexo : sexoEnum.values()) {
+    public static SexoEnum getSexoEnum(String value) {
+        for (SexoEnum sexo : SexoEnum.values()) {
             if (sexo.getSexo().equals(value)) {
                 return sexo;
             }

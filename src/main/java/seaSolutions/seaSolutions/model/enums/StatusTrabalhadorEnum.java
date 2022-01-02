@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public enum statusTrabalhadorEnum {
+public enum StatusTrabalhadorEnum {
 	
 	ATIVO("ativo"), 
 	INATIVO("inativo");
@@ -15,8 +15,8 @@ public enum statusTrabalhadorEnum {
     private String status;
     
     @JsonCreator
-    public static statusTrabalhadorEnum getSexoEnum(String value) {
-        for (statusTrabalhadorEnum status : statusTrabalhadorEnum.values()) {
+    public static StatusTrabalhadorEnum getSexoEnum(String value) {
+        for (StatusTrabalhadorEnum status : StatusTrabalhadorEnum.values()) {
             if (status.getStatus().equals(value)) {
                 return status;
             }
